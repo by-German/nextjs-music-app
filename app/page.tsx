@@ -1,11 +1,13 @@
 import { Button } from "@nextui-org/react";
+import { Header } from "./ui/header";
 
-export default function Home() {  
+export default function Home() {
   return (
-    <main>
-      <Button>Click me</Button>
-
-
-    </main>
+    <>
+      <Header />
+      <main>
+        <Button>Click me</Button>
+      </main>
+    </>
   );
 }
