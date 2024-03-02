@@ -5,7 +5,7 @@ import { SfxOption } from "./shared/sfx-option";
 
 export function Header() {
   return (
-    <header className="flex justify-between mx-8 my-4">
+    <header className="flex justify-between items-center mx-8 my-4">
       <h1>Music App</h1>
 
       <div className="flex gap-x-8">
