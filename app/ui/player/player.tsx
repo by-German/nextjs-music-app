@@ -1,5 +1,3 @@
-import { Grenze } from "next/font/google";
-
 export function Player() {
   return (
     <div style={{border: "1px solid blue"}}>
