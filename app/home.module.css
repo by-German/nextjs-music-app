@@ -1,0 +1,8 @@
+.grid_template {
+  border: 1px solid green;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 80px auto 80px;
+}
