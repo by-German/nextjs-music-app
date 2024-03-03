@@ -5,12 +5,13 @@ import { PlayIcon } from "../../icons/play.icon"
 import { SkipBackIcon } from "@/app/icons/skip-back.icon";
 import { SkipNextIcon } from "@/app/icons/skip-next.icon";
 import { FavoriteIcon } from "@/app/icons/favorite.icon";
+import { VolumeController } from "./volume-controller";
 
 export function PlayerControllers() {
   return (
     <>
       <div className="flex gap-x-4">
-        <Slider />
+        <Slider aria-label="playtime slider"/>
         <span>0:00</span>
       </div>
 
@@ -34,8 +35,7 @@ export function PlayerControllers() {
           </Button>
         </div>
 
-        // TODO: Add volume control
-
+        <VolumeController />
       </div>
 
     </>
