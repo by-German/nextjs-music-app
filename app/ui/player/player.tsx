@@ -1,6 +1,11 @@
+'use client'
+
+import { useRef } from "react";
 import { PlayerControllers } from "./player-controllers";
 
 export function Player() {
+  const audioRef = useRef<HTMLAudioElement>(null);
+
   return (
     <div className="flex">
       <img
@@ -17,7 +22,8 @@ export function Player() {
           <h3 className="text-lg">witchgang</h3>
         </div>
 
-        <PlayerControllers />
+        <audio ref={audioRef} src="audio/sample.mp3"></audio>
+        <PlayerControllers audioRef={audioRef}/>
       </div>
     </div>
   );
