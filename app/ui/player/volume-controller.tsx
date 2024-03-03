@@ -10,7 +10,7 @@ import { MuteIcon } from "@/app/icons/mute.icon";
 export function VolumeController() {
   const [volume, setVolume] = useState(50);
   const muted = useRef(false);
-  const [prevVolume, setPrevVolume] = useState(volume);
+  const prevVolume = useRef(volume);
 
   const handleVolumeChange = (volume: any) => {
     setVolume(volume);
@@ -18,8 +18,10 @@ export function VolumeController() {
 
   const handleMute = () => {
     muted.current = !muted.current;
-    setPrevVolume(volume);
-    setVolume(muted.current ? 0 : prevVolume);
+    if (muted.current) {
+      prevVolume.current = volume;
+    }
+    setVolume(muted.current ? 0 : prevVolume.current);
   }
 
   return (
