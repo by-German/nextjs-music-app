@@ -17,9 +17,7 @@ export function Player() {
           <h3 className="text-lg">witchgang</h3>
         </div>
 
-        <div className="flex flex-col border-2 border-green-600">
-          <PlayerControllers />
-        </div>
+        <PlayerControllers />
       </div>
     </div>
   );
