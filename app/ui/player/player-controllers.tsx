@@ -9,13 +9,23 @@ import { SkipBackIcon } from "@/app/icons/skip-back.icon";
 import { SkipNextIcon } from "@/app/icons/skip-next.icon";
 import { FavoriteIcon } from "@/app/icons/favorite.icon";
 import { VolumeController } from "./volume-controller";
-import { RefObject, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
+import { getTimeFormatPlayer } from "@/app/lib/utils";
 
 
 export function PlayerControllers(
   { audioRef }: { audioRef: RefObject<HTMLAudioElement> }
 ) {
   const [playing, setPlaying] = useState(false);
+  const [currenTime, setCurrentTime] = useState('00:00');
+  const [duration, setDuration] = useState('00:00');
+
+  useEffect(() => {
+    if (!audioRef.current) return;
+
+    audioRef.current.ontimeupdate = handleTimeline;
+    setDuration(getTimeFormatPlayer(audioRef.current.duration));
+  }, [audioRef]);
 
   const handlePlay = () => {
     if (!audioRef.current) return;
@@ -24,11 +34,19 @@ export function PlayerControllers(
     playing ? audioRef.current.pause() : audioRef.current.play();
   }
 
+  const handleTimeline = (e: any) => {
+    if (!audioRef.current) return;
+
+    const audioTarget = e.target as HTMLAudioElement;
+    setCurrentTime(getTimeFormatPlayer(audioTarget.currentTime));
+  }
+
   return (
     <>
       <div className="flex gap-x-4">
+        <span>{currenTime}</span>
         <Slider aria-label="playtime slider" />
-        <span>0:00</span>
+        <span>{duration}</span>
       </div>
 
       <div className="flex justify-evenly items-center mb-4 mt-2">
