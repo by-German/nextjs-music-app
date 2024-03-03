@@ -9,14 +9,19 @@ import { SkipBackIcon } from "@/app/icons/skip-back.icon";
 import { SkipNextIcon } from "@/app/icons/skip-next.icon";
 import { FavoriteIcon } from "@/app/icons/favorite.icon";
 import { VolumeController } from "./volume-controller";
-import { useState } from "react";
+import { RefObject, useState } from "react";
 
 
-export function PlayerControllers() {
+export function PlayerControllers(
+  { audioRef }: { audioRef: RefObject<HTMLAudioElement> }
+) {
   const [playing, setPlaying] = useState(false);
 
   const handlePlay = () => {
+    if (!audioRef.current) return;
+
     setPlaying(!playing);
+    playing ? audioRef.current.pause() : audioRef.current.play();
   }
 
   return (
