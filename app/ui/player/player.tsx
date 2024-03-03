@@ -1,8 +1,4 @@
-import { Button } from "@nextui-org/react";
-import { PlayIcon } from "../../icons/play.icon"
-import { SkipNextIcon } from "@/app/icons/skip-next.icon";
-import { SkipBackIcon } from "@/app/icons/skip-back.icon";
-
+import { PlayerControllers } from "./player-controllers";
 
 export function Player() {
   return (
@@ -16,28 +12,13 @@ export function Player() {
 
       <div className="flex flex-col w-full pl-4">
 
-        <div className="grow flex flex-col justify-end border-2 border-red-600">
+        <div className="grow flex flex-col justify-end mb-4 border-2 border-red-600">
           <h2 className="text-2xl">Nothing's Alright is okay</h2>
           <h3 className="text-lg">witchgang</h3>
         </div>
 
         <div className="flex flex-col border-2 border-green-600">
-          <div>
-            Time line
-          </div>
-          <div className="flex justify-center items-center gap-x-3 mb-4">
-            <Button isIconOnly aria-label="skip-back">
-              <SkipBackIcon filled />
-            </Button>
-
-            <Button isIconOnly color="primary" aria-label="play" size="lg">
-              <PlayIcon filled size={30} />
-            </Button>
-
-            <Button isIconOnly aria-label="skip-next">
-              <SkipNextIcon filled />
-            </Button>
-          </div>
+          <PlayerControllers />
         </div>
       </div>
     </div>
