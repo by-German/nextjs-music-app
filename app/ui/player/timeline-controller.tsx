@@ -18,11 +18,11 @@ export function TimelineController({
   useEffect(() => {
     if (!audioRef.current) return;
 
-    audioRef.current.ontimeupdate = handleTimeline;
+    audioRef.current.ontimeupdate = handleTimeUpdate;
     setDuration(getTimeFormatPlayer(audioRef.current.duration));
   }, [audioRef])
 
-  const handleTimeline = (e: any) => {
+  const handleTimeUpdate = (e: any) => {
     const audioTarget = e.target as HTMLAudioElement;
     setCurrentTime(getTimeFormatPlayer(audioTarget.currentTime));
   }
