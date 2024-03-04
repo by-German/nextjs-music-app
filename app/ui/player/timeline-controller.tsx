@@ -12,10 +12,14 @@ export function TimelineController({
   audioRef: RefObject<HTMLAudioElement>
 }) {
 
-  const [currenTime, setCurrentTime] = useState('00:00');
+  const [currentTime, setCurrentTime] = useState('00:00');
   const [duration, setDuration] = useState('00:00');
   const useDuration = useRef(0);
-  const useCurrentTime = useRef(0);
+
+  const [currentTimeline, setCurrentTimeline] = useState(0);
+
+  const isTimelineBeingUsed = useRef(false);
+  const timeLine = useRef(null);
 
   useEffect(() => {
     if (!audioRef.current) return;
@@ -28,27 +32,38 @@ export function TimelineController({
   const handleTimeUpdate = (e: any) => {
     const audioTarget = e.target as HTMLAudioElement;
 
-    // TODO: only change when slider is not being used
-    console.log("playing")
+    // only change when slider is not being used
+    if (isTimelineBeingUsed.current) return;
+
     setCurrentTime(getTimeFormatPlayer(audioTarget.currentTime));
-    useCurrentTime.current = audioTarget.currentTime;
+    setCurrentTimeline(audioTarget.currentTime);
   }
 
   const handleTimelineChange = (value: any) => {
     audioRef.current!.currentTime = value;
     setCurrentTime(getTimeFormatPlayer(value));
+
+    isTimelineBeingUsed.current = false;
+  }
+
+  // temp
+  const handleSlider = (value: any) => {
+    isTimelineBeingUsed.current = true;
+    setCurrentTimeline(value);
   }
 
   return (
     <div className="flex gap-x-4">
-      <span>{currenTime}</span>
+      <span>{currentTime}</span>
       <Slider aria-label="playtime slider"
+        ref={timeLine}
         minValue={0}
         maxValue={useDuration.current}
-        value={useCurrentTime.current}
+        value={currentTimeline}
         step={0.001}
         showTooltip={true}
         onChangeEnd={handleTimelineChange}
+        onChange={handleSlider}
       />
       <span>{duration}</span>
     </div >
