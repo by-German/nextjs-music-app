@@ -46,7 +46,6 @@ export function TimelineController({
     isTimelineBeingUsed.current = false;
   }
 
-  // temp
   const handleSlider = (value: any) => {
     isTimelineBeingUsed.current = true;
     setCurrentTimeline(value);
