@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { PlayerControllers } from "./player-controllers";
 // temp
 import * as musicMetadata from 'music-metadata-browser';
@@ -11,14 +11,6 @@ export function Player() {
 
   // temp
   const [metadata, setMetadada] = useState<musicMetadata.IAudioMetadata>();
-
-  useEffect(() => {
-    loadMetadata();
-  }, []);
-
-  const loadMetadata = async () => {
-    console.log('loading metadata')
-  }
 
   const onloadedFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
@@ -47,8 +39,10 @@ export function Player() {
           <h3 className="text-lg">{metadata?.common.album ?? 'Album'}</h3>
         </div>
 
+        {/* // TODO: improve file input */}
         <input type="file" ref={useFile} onChange={onloadedFile}>
         </input>
+        {/* // TODO: remove audio element */}
         <audio ref={audioRef} src="audio/sample.mp3"></audio>
         <PlayerControllers audioRef={audioRef} />
       </div>
