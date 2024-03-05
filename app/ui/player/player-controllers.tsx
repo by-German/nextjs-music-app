@@ -1,7 +1,6 @@
 'use client'
 
 import { Button } from "@nextui-org/react";
-import { Slider } from "@nextui-org/react";
 
 import { PlayIcon } from "../../icons/play.icon"
 import { PauseIcon } from "@/app/icons/pause.icon";
@@ -9,7 +8,7 @@ import { SkipBackIcon } from "@/app/icons/skip-back.icon";
 import { SkipNextIcon } from "@/app/icons/skip-next.icon";
 import { FavoriteIcon } from "@/app/icons/favorite.icon";
 import { VolumeController } from "./volume-controller";
-import { RefObject, useEffect, useState } from "react";
+import { RefObject, useState } from "react";
 
 import { TimelineController } from "./timeline-controller";
 
@@ -53,7 +52,6 @@ export function PlayerControllers(
 
         <VolumeController audioRef={audioRef} />
       </div>
-
     </>
   );
 }
