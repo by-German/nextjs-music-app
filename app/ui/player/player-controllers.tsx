@@ -51,7 +51,7 @@ export function PlayerControllers(
           </Button>
         </div>
 
-        <VolumeController />
+        <VolumeController audioRef={audioRef} />
       </div>
 
     </>

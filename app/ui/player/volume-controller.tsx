@@ -1,19 +1,22 @@
 'use client'
 
-import { useRef, useState } from "react";
+import { useRef, useState, RefObject } from "react";
 
 import { Button } from "@nextui-org/react";
 import { Slider } from "@nextui-org/react";
 import { VolumeIcon } from "@/app/icons/volume.icon";
 import { MuteIcon } from "@/app/icons/mute.icon";
 
-export function VolumeController() {
-  const [volume, setVolume] = useState(50);
+export function VolumeController(
+  { audioRef }: { audioRef: RefObject<HTMLAudioElement> }
+) {
+  const [volume, setVolume] = useState(0.5);
   const muted = useRef(false);
   const prevVolume = useRef(volume);
 
   const handleVolumeChange = (volume: any) => {
     setVolume(volume);
+    audioRef.current!.volume = volume;
   }
 
   const handleMute = () => {
@@ -22,6 +25,7 @@ export function VolumeController() {
       prevVolume.current = volume;
     }
     setVolume(muted.current ? 0 : prevVolume.current);
+    audioRef.current!.volume = muted.current ? 0 : prevVolume.current;
   }
 
   return (
@@ -34,7 +38,14 @@ export function VolumeController() {
           : <MuteIcon filled />}
       </Button>
 
-      <Slider size="sm" value={volume} onChange={handleVolumeChange} aria-label="volume slider"/>
+      <Slider aria-label="volume slider"
+        size="sm"
+        minValue={0}
+        maxValue={1}
+        step={0.01}
+        value={volume}
+        onChange={handleVolumeChange}
+      />
     </div>
   );
 }
