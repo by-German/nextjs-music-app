@@ -24,15 +24,30 @@ export function PlayerControllers(
     playing ? audioRef.current.pause() : audioRef.current.play();
   }
 
+  const handleUpdateFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!audioRef.current) return;
+
+    const file = e.target.files![0];
+    audioRef.current.src = URL.createObjectURL(file);
+    
+    if (playing) {
+      audioRef.current.play();
+    }
+  }
+
   return (
     <>
       <TimelineController audioRef={audioRef} />
 
       <div className="flex justify-evenly items-center mb-4 mt-2">
 
-        <Button isIconOnly aria-label="favorite" size="sm" >
-          <FavoriteIcon filled />
-        </Button>
+        <div>
+          <label htmlFor="file-upload"
+            className="cursor-pointer inline-flex items-center justify-center px-2 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-transparent hover:bg-slate-600 active:bg-slate-400 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out">
+            <FavoriteIcon filled />
+          </label>
+          <input id="file-upload" type="file" className="hidden" onChange={handleUpdateFile} />
+        </div>
 
         <div className="w-96 flex justify-center items-center gap-x-4">
           <Button isIconOnly aria-label="skip-back">
