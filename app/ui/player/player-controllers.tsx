@@ -12,8 +12,12 @@ import { RefObject, useState } from "react";
 
 import { TimelineController } from "./timeline-controller";
 
-export function PlayerControllers(
-  { audioRef }: { audioRef: RefObject<HTMLAudioElement> }
+export function PlayerControllers({
+  audioRef, setFile
+}: {
+  audioRef: RefObject<HTMLAudioElement>,
+  setFile: (file: File) => void
+}
 ) {
   const [playing, setPlaying] = useState(false);
 
@@ -29,10 +33,12 @@ export function PlayerControllers(
 
     const file = e.target.files![0];
     audioRef.current.src = URL.createObjectURL(file);
-    
+
     if (playing) {
       audioRef.current.play();
     }
+
+    setFile(file);
   }
 
   return (
