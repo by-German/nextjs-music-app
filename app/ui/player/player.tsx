@@ -3,21 +3,21 @@
 import { useState, useRef } from "react";
 import { PlayerControllers } from "./player-controllers";
 // temp
-import * as musicMetadata from 'music-metadata-browser';
+import { IAudioMetadata, parseBlob } from 'music-metadata-browser';
 
 export function Player() {
   const audioRef = useRef<HTMLAudioElement>(new Audio('audio/sample.mp3'));
   const useFile = useRef<HTMLInputElement>(null);
 
   // temp
-  const [metadata, setMetadada] = useState<musicMetadata.IAudioMetadata>();
+  const [metadata, setMetadada] = useState<IAudioMetadata>();
 
   const onloadedFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
-    musicMetadata.parseBlob(file).then((metadata: musicMetadata.IAudioMetadata) => {
+    parseBlob(file).then((metadata: IAudioMetadata) => {
       setMetadada(metadata)
     })
-    audioRef.current!.src = URL.createObjectURL(useFile.current!.files![0]);
+    audioRef.current!.src = URL.createObjectURL(file);
   }
 
   return (
@@ -40,10 +40,6 @@ export function Player() {
           <h3 className="text-lg">{metadata?.common.album ?? 'Album'}</h3>
         </div>
 
-        {/* // TODO: improve file input */}
-        <input type="file" ref={useFile} onChange={onloadedFile}>
-        </input>
-        
         <PlayerControllers audioRef={audioRef} />
       </div>
     </div>
