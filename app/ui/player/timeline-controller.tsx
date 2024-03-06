@@ -25,8 +25,12 @@ export function TimelineController({
     if (!audioRef.current) return;
 
     audioRef.current.ontimeupdate = handleTimeUpdate;
-    setDuration(getTimeFormatPlayer(audioRef.current.duration));
-    useDuration.current = audioRef.current.duration;
+
+    audioRef.current.onloadeddata = () => {
+      setDuration(getTimeFormatPlayer(audioRef.current!.duration));
+      useDuration.current = audioRef.current!.duration;
+    }
+
   }, [audioRef])
 
   const handleTimeUpdate = (e: any) => {
