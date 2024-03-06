@@ -6,7 +6,7 @@ import { PlayerControllers } from "./player-controllers";
 import * as musicMetadata from 'music-metadata-browser';
 
 export function Player() {
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(new Audio('audio/sample.mp3'));
   const useFile = useRef<HTMLInputElement>(null);
 
   // temp
@@ -17,6 +17,7 @@ export function Player() {
     musicMetadata.parseBlob(file).then((metadata: musicMetadata.IAudioMetadata) => {
       setMetadada(metadata)
     })
+    audioRef.current!.src = URL.createObjectURL(useFile.current!.files![0]);
   }
 
   return (
@@ -42,8 +43,7 @@ export function Player() {
         {/* // TODO: improve file input */}
         <input type="file" ref={useFile} onChange={onloadedFile}>
         </input>
-        {/* // TODO: remove audio element */}
-        <audio ref={audioRef} src="audio/sample.mp3"></audio>
+        
         <PlayerControllers audioRef={audioRef} />
       </div>
     </div>
