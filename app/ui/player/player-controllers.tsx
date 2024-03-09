@@ -6,11 +6,11 @@ import { PlayIcon } from "../../icons/play.icon"
 import { PauseIcon } from "@/app/icons/pause.icon";
 import { SkipBackIcon } from "@/app/icons/skip-back.icon";
 import { SkipNextIcon } from "@/app/icons/skip-next.icon";
-import { FavoriteIcon } from "@/app/icons/favorite.icon";
 import { VolumeController } from "./volume-controller";
 import { RefObject, useState } from "react";
 
 import { TimelineController } from "./timeline-controller";
+import { UploadIcon } from "@/app/icons/upload.icon";
 
 export function PlayerControllers({
   audioRef, setFile
@@ -50,7 +50,7 @@ export function PlayerControllers({
         <div>
           <label htmlFor="file-upload"
             className="cursor-pointer inline-flex items-center justify-center px-2 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-transparent hover:bg-slate-600 active:bg-slate-400 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out">
-            <FavoriteIcon filled />
+            <UploadIcon filled /> 
           </label>
           <input id="file-upload" type="file" className="hidden" onChange={handleUpdateFile} />
         </div>
