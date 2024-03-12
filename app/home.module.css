@@ -1,8 +1,20 @@
-.grid_template {
-  border: 1px solid green;
+/* .grid_template {
+  border: 3px solid green;
   height: 100%;
 
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 60px 3fr 1.5fr;
+} */
+
+.grid_template {
+  border: 3px solid green;
+  
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content {
+  flex: 1;
 }

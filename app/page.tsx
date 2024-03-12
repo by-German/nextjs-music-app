@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className={styles.grid_template}>
       <Header></Header>
-      <div className="content" style={{ border: "1px solid yellow" }}></div>
+      <div className={styles.content} style={{ border: "1px solid yellow" }}></div>
       <Player></Player>
     </main>
   );
